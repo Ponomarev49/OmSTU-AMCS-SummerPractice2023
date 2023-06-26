@@ -1,4 +1,4 @@
-﻿namespace SquareEquationLib;
+﻿﻿﻿namespace SquareEquationLib;
 
 public class SquareEquation
 {
@@ -10,8 +10,8 @@ public class SquareEquation
         if
         (
             (double.IsInfinity(a))||(double.IsNaN(a))||
-            (double.IsInfinity(a))||(double.IsNaN(a))||
-            (double.IsInfinity(a))||(double.IsNaN(a))
+            (double.IsInfinity(b))||(double.IsNaN(b))||
+            (double.IsInfinity(c))||(double.IsNaN(c))
         )
         throw new System.ArgumentException();
         double d =b*b - 4 * a * c;
