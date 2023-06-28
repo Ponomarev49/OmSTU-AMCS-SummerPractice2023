@@ -30,7 +30,7 @@ public class UnitTests
     }
 
     [Theory]
-    [InlineData(1, 15, 5)]
+    [InlineData(1, 10, 9)]
     public void discriminant_more_zero(double a, double b, double c)
     {
         double[] array = SquareEquationLib.SquareEquation.Solve(a, b, c);
