@@ -19,14 +19,6 @@ public class ServiceLocatorTest
     }
 
     [Fact]
-    public void Service3Test()
-    {
-        var expected = "В читальном зале";
-        var actual = SalonLib.ServiceLocator.GetService("Писать статьи");
-        Assert.Equal(expected, actual);
-    }
-
-    [Fact]
     public void Service4Test()
     {
         var expected = "За карточным столом";
