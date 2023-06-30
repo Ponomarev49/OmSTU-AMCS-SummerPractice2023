@@ -7,39 +7,37 @@ using TechTalk.SpecFlow;
 [Binding, Scope(Feature = "Космический бой")]
 public class SpaceBattl
 {
-     private double[] coord {get; set;}
-     private double[] speed {get; set;}
-     private double[] result {get; set;}
+     private SpaceShip NCC_1701 =  new SpaceShip(); 
      private Exception except {get; set;}
 
      [Given(@"космический корабль находится в точке пространства с координатами \((.*), (.*)\)")]
      public void Coord(double a, double b)
      {
-     this.coord = new double[]{a,b};
+     NCC_1701.coord = new double[]{a,b};
      }
 
      [Given(@"имеет мгновенную скорость \((.*), (.*)\)")]
      public void Speed(double a, double b)
      {
-     this.speed = new double[]{a,b};
+     NCC_1701.speed = new double[]{a,b};
      }
 
      [Given(@"космический корабль, положение в пространстве которого невозможно определить")]
      public void CoordNaN()
      {
-     this.coord = new double[]{double.NaN,double.NaN};
+     NCC_1701.coord = new double[]{double.NaN,double.NaN};
      }
 
      [Given(@"скорость корабля определить невозможно")]
      public void SpeedNaN()
      {
-     this.speed = new double[]{double.NaN,double.NaN};
+     NCC_1701.speed = new double[]{double.NaN,double.NaN};
      }
 
      [Given(@"изменить положение в пространстве космического корабля невозможно")]
      public void CoordNot()
      {
-     this.coord = new double[]{double.NaN,double.NaN};
+     NCC_1701.coord = new double[]{double.NaN,double.NaN};
      }
      
 
@@ -48,7 +46,7 @@ public class SpaceBattl
      {
           try
           {
-               this.result = SpaceBattleLib.SpaceBattle.Move(coord, speed);
+               NCC_1701.coord = SpaceBattleLib.SpaceShip.Move(NCC_1701.coord, NCC_1701.speed);
           }
           catch(ArgumentException e)
           {
@@ -61,7 +59,7 @@ public class SpaceBattl
      public void move(double expect1, double expect2)
      {
           double[] expected = {expect1, expect2};
-          result.Should().ContainInOrder(expected);
+          NCC_1701.coord.Should().ContainInOrder(expected);
      }
 
      [Then(@"возникает ошибка Exception")]
@@ -74,19 +72,18 @@ public class SpaceBattl
 [Binding, Scope(Feature = "Топливо")]
 public class Space_Fuel
 {
-     private double fuel_count {get; set;}
-     private double consumption {get; set;}
+     private SpaceShip NCC_1701 =  new SpaceShip();
      private Exception except {get; set;}
      [Given(@"космический корабль имеет топливо в объеме (.*) ед")]
      public void Fuel_Count(double a)
      {
-          this.fuel_count = a;
+          NCC_1701.fuel_count = a;
      }
 
      [Given(@"имеет скорость расхода топлива при движении (.*) ед")]
      public void Consaption_count(double b)
      {
-          this.consumption = b;
+          NCC_1701.consumption = b;
      }
 
 
@@ -95,7 +92,7 @@ public class Space_Fuel
      {
           try
           {
-               this.fuel_count = SpaceBattleLib.SpaceBattle.Fuel(fuel_count,consumption);
+               NCC_1701.fuel_count = SpaceBattleLib.SpaceShip.Fuel(NCC_1701.fuel_count,NCC_1701.consumption);
           }
           catch(ArgumentException e)
           {
@@ -107,7 +104,7 @@ public class Space_Fuel
      [Then(@"новый объем топлива космического корабля равен (.*) ед")]
      public void Consumption(double expect)
      {
-          fuel_count.Should().Be(expect);
+          NCC_1701.fuel_count.Should().Be(expect);
      }
 
      [Then(@"возникает ошибка Exception")]
@@ -119,37 +116,36 @@ public class Space_Fuel
 [Binding, Scope(Feature = "Угол")]
 public class Space_corner
 {
-     private double corner {get; set;}
-     private double corner_speed {get; set;}
+     private SpaceShip NCC_1701 =  new SpaceShip();
      private Exception except {get; set;}
      [Given(@"космический корабль имеет угол наклона (.*) град к оси OX")]
      public void Ship_corner(double a)
      {
-          this.corner = a;
+          NCC_1701.corner = a;
      }
 
      [Given(@"космический корабль, угол наклона которого невозможно определить")]
      public void Ship_corner_NaN()
      {
-          this.corner = double.NaN;
+          NCC_1701.corner = double.NaN;
      }
 
      [Given(@"невозможно изменить уголд наклона к оси OX космического корабля")]
      public void Ship_corner_Stop()
      {
-          this.corner = double.NaN;
+          NCC_1701.corner = double.NaN;
      }
 
      [Given(@"имеет мгновенную угловую скорость (.*) град")]
      public void Ship_corner_speed(double b)
      {
-          this.corner_speed = b;
+          NCC_1701.corner_speed = b;
      }
 
      [Given(@"мгновенную угловую скорость невозможно определить")]
      public void Ship_corner_speed_NaN()
      {
-          this.corner_speed = double.NaN;
+          NCC_1701.corner_speed = double.NaN;
      }
 
 
@@ -158,7 +154,7 @@ public class Space_corner
      {
           try
           {
-               this.corner = SpaceBattleLib.SpaceBattle. Corner_speed(corner,corner_speed);
+               NCC_1701.corner = SpaceBattleLib.SpaceShip. Corner_speed(NCC_1701.corner,NCC_1701.corner_speed);
           }
           catch(ArgumentException e)
           {
@@ -170,7 +166,7 @@ public class Space_corner
      [Then(@"угол наклона космического корабля к оси OX составляет (.*) град")]
      public void Consumption(double expect)
      {
-          corner.Should().Be(expect);
+          NCC_1701.corner.Should().Be(expect);
      }
 
      [Then(@"возникает ошибка Exception")]

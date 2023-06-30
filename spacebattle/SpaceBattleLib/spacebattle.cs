@@ -1,11 +1,16 @@
 ﻿﻿﻿namespace SpaceBattleLib;
 
-public class SpaceBattle
+public class SpaceShip
 {
-    
+    public double[] coord = new double[2];
+    public double[] speed = new double[2];
+    public double fuel_count;
+    public double consumption;
+    public double corner;
+    public double corner_speed;
+
     public static double[] Move(double[] coord, double[] speed)
     {
-        double[] answer;
         if
         (
             (double.IsNaN(coord[0]))||(double.IsNaN(coord[1]))||
@@ -14,11 +19,10 @@ public class SpaceBattle
         throw new System.ArgumentException();
         else
         {
-            answer = new double[2];
-            answer[0] = coord[0]+speed[0];
-            answer[1] = coord[1]+speed[1];
+            coord[0]+=speed[0];
+            coord[1]+=speed[1];
         }
-        return answer;
+        return coord;
     }
 
     public static double Fuel(double fuel_count ,double consumption)
