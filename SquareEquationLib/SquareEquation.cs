@@ -27,7 +27,7 @@ public class SquareEquation
         else
         {
             answer = new double[2];
-            answer[0] = -(b + Math.Sign(b) * Math.Sqrt(d)) / 2;
+            answer[0] = -(b + (b >= 0 ? 1 : -1) * Math.Sqrt(d)) / 2;
             answer[1] = c / answer[0];
         }
         return answer;
