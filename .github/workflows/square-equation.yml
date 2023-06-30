@@ -2,7 +2,7 @@ name: space battle test
 
 on:
   push:
-    branches: ["solution"]
+    branches: ["solution_upgrade"]
 
 jobs:
   build:
