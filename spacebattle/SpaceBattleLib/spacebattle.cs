@@ -2,6 +2,7 @@
 
 public class SpaceBattle
 {
+    
     public static double[] Move(double[] coord, double[] speed)
     {
         double[] answer;
@@ -18,5 +19,23 @@ public class SpaceBattle
             answer[1] = coord[1]+speed[1];
         }
         return answer;
+    }
+
+    public static double Fuel(double fuel_count ,double consumption)
+    {
+        if (fuel_count > consumption)
+        {
+            fuel_count-=consumption;
+        }
+        else throw new System.ArgumentException();
+        return fuel_count;
+    }
+
+    public static double Corner_speed(double corner,double corner_speed)
+    {
+        if ((double.IsNaN(corner))||(double.IsNaN(corner_speed)))  
+        throw new System.ArgumentException();
+        else corner+=corner_speed;
+        return corner;
     }
 }
