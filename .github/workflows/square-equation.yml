@@ -1,8 +1,8 @@
-name: square equation test
+name: space battle test
 
 on:
   push:
-    branches: ["square_equation"]
+    branches: ["solution"]
 
 jobs:
   build:
@@ -17,12 +17,10 @@ jobs:
           dotnet-version: 7.0.x
 
       - name: Restore dependencies
-        run: dotnet restore SquareEquationLib
+        run: dotnet restore ./spacebattle/SpaceBattleLib
 
       - name: Build
-        run: dotnet build SquareEquationLib --no-restore /p:ContinuousIntegrationBuild=true
+        run: dotnet build ./spacebattle/SpaceBattleLib --no-restore /p:ContinuousIntegrationBuild=true
 
       - name: Test
-        run: ./SquareEquationTest ./SquareEquationLib/bin/Debug/net7.0/SquareEquationLib.dll
-      - name: Coverlet.MSBuild
-        run: cd XUnit.Coverlet.MSBuild/ && dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura  
+        run: cd spacebattle && dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura  
