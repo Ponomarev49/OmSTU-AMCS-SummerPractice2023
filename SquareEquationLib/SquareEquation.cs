@@ -6,14 +6,19 @@ public class SquareEquation
     {
         double[] answer;
         double eps = Math.Pow(10,-6);
-        if (Math.Abs(a)<eps) throw new System.ArgumentException();
+        if (Math.Abs(a)<eps) 
+        {
+            throw new System.ArgumentException();
+        }
         if
         (
             (double.IsInfinity(a))||(double.IsNaN(a))||
             (double.IsInfinity(b))||(double.IsNaN(b))||
             (double.IsInfinity(c))||(double.IsNaN(c))
         )
-        throw new System.ArgumentException();
+        {
+            throw new System.ArgumentException();
+        }
         double d =b*b - 4 * a * c;
         if (d < 0 && !(Math.Abs(d) < eps))
         {
