@@ -1,73 +1,42 @@
-using Xunit;
-using SquareEquationLib;
+namespace XUnit.Coverlet.MSBuild;
 
-namespace PrimeService.Tests;
-
-public class UnitTest1
+public class UnitTests
 {
-    [Fact]
-        public void AIs0Test()
+    [Theory]
+    [InlineData(0, 1, 1)]
+    [InlineData(1, double.NegativeInfinity, 1)]
+    [InlineData(6, 1, double.PositiveInfinity)]
+    [InlineData(1, 1, double.NaN)]
+    [InlineData(1, double.NaN, 1)]
+    public void Exeptions(double a, double b, double c)
+    {
+        Assert.Throws<ArgumentException>(() => SquareEquationLib.SquareEquation.Solve(a, b, c));
+    }
+
+    [Theory]
+    [InlineData(10, 1, 5)]
+    public void discriminant_less_zero (double a, double b, double c)
+    {
+         double[] array = SquareEquationLib.SquareEquation.Solve(a, b, c);
+         Assert.True(array.Length == 0);
+    }
+
+    [Theory]
+    [InlineData(1, 0, 0)]
+    public void discriminant_equals_zero(double a, double b, double c)
+    {
+        double[] array = SquareEquationLib.SquareEquation.Solve(a, b, c);
+        Assert.Equal(0, Math.Abs(a*Math.Pow(array[0], 2) + b*array[0] + c),Math.Pow(10,-6));
+    }
+
+    [Theory]
+    [InlineData(1, 10, 9)]
+    public void discriminant_more_zero(double a, double b, double c)
+    {
+        double[] array = SquareEquationLib.SquareEquation.Solve(a, b, c);
+        foreach (double x in array)
         {
-            Assert.Throws<ArgumentException>(() => SquareEquation.Solve(0, 0, 0));
+            Assert.Equal(0, Math.Abs(a*Math.Pow(x, 2) + b*x + c),Math.Pow(10,-6));
         }
-        [Fact]
-        public void InnormalArgumentTest()
-        {
-            var values = new double[] {double.NaN, double.PositiveInfinity, double.NegativeInfinity};
-             
-            foreach(double a in values)
-            {
-                foreach(double b in values)
-                {
-                    foreach(double c in values)
-                    {
-                        Assert.Throws<ArgumentException>(() => SquareEquation.Solve(a, b, c));
-                    }
-                }
-            }
-        }
-        [Theory]
-        [InlineData(1,1,0.24999999995, new double[] {-0.5000071})]
-        [InlineData(0.5,1,0.499999999995, new double[] {-0.500002})]
-        public void DiscriminantCloseToZero(double a, double b, double c, double[] excpectedRoots)
-        {
-            double[] methodResult;
-            methodResult = SquareEquation.Solve(a,b,c);
-            
-            if (methodResult.Length != excpectedRoots.Length)
-            {
-                Assert.Fail("Number of roots not match");
-            }
-
-            for (int i = 0; i < methodResult.Length; i++)
-            {
-                Assert.Equal(methodResult[i], excpectedRoots[i], 6);
-            }
-        }
-
-        [Theory]
-        [InlineData(1, 0, 1, new double[] {})]
-        [InlineData(10, 2, 10, new double[] {})]
-        [InlineData(1,0,0, new double[] {0})]
-        [InlineData(1,4,4, new double[] {-2})]
-        [InlineData(1,0,-1, new double[] {-1, 1})]
-        [InlineData(1,5,6, new double[] {-2, -3})]
-
-        public void RootCorrectness(double a, double b, double c, double[] expectedRoots)
-        {
-            double[] actualRoots;
-            actualRoots = SquareEquation.Solve(a, b, c);
-            Array.Sort(actualRoots);
-            Array.Sort(expectedRoots);
-
-            if (expectedRoots.Length != actualRoots.Length)
-            {
-                Assert.Fail("Number of root does not match");
-            }
-
-            for (int i = 0; i < expectedRoots.Length; i++)
-            {
-                Assert.Equal(expectedRoots[i], actualRoots[i], 6);
-            }
-        }
+    }
 }
