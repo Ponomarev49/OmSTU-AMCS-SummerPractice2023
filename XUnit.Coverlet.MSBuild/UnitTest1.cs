@@ -15,6 +15,7 @@ public class UnitTests
 
     [Theory]
     [InlineData(10, 1, 5)]
+    [InlineData(5, 2, 4)]
     public void discriminant_less_zero (double a, double b, double c)
     {
          double[] array = SquareEquationLib.SquareEquation.Solve(a, b, c);
