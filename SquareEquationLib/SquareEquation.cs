@@ -19,7 +19,7 @@ public class SquareEquation
         {
             throw new System.ArgumentException();
         }
-        double d =b*b - 4 * a * c;
+        double d =b * b - 4 * a * c;
         if (d < 0 && !(Math.Abs(d) < eps))
         {
             answer = new double[0];
